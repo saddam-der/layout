@@ -1,7 +1,7 @@
-window.$ = window.jQuery = require('jquery');
-require('../dist/libs/apexcharts/apexcharts.min.js')
-require('../dist/libs/flatpickr/flatpickr.min.js')
-require('../dist/libs/selectize/js/standalone/selectize.min.js')
+// window.$ = window.jQuery = require('jquery');
+// require('../dist/libs/apexcharts/apexcharts.min.js')
+// require('../dist/libs/flatpickr/flatpickr.min.js')
+// require('../dist/libs/selectize/js/standalone/selectize.min.js')
 
 //Navigation
 // require('../dist/js/pages/dashboard-1.init.js')
@@ -25,5 +25,5 @@ require('../dist/libs/selectize/js/standalone/selectize.min.js')
 // require('../dist/js/pages/calendar.init.js')
 
 //Components
-require('../dist/js/pages/animation.init.js')
+// require('../dist/js/pages/animation.init.js')
 // require('../dist/js/app.min.js')

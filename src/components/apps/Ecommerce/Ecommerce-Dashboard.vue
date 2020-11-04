@@ -160,7 +160,7 @@
 
                         <div class="widget-chart text-center" dir="ltr">
 
-                            <div id="world-map-markers" style="height: 230px" class="mt-4"></div>
+                            <vuevectormap></vuevectormap>
 
                             <h5 class="text-muted mt-4">Total sales made today</h5>
                             <h2>$178</h2>
@@ -375,5 +375,5 @@ export default {
 </script>
 
 <style>
-
+@import 'jsvectormap';
 </style>

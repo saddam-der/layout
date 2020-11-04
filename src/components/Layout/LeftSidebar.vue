@@ -65,7 +65,8 @@ rr<template>
                     </div>
                 </li>
 
-                <li class="menu-title mt-2">Apps</li>
+                <li class=" menu-title mt-2">Apps
+                </li>
 
                 <li>
                     <router-link to="/calendar">
@@ -285,46 +286,46 @@ rr<template>
                     <div class="collapse" id="sidebarAuth">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="auth-login.html">Log In</a>
+                                <router-link to='/auth-login'>Log In</router-link>
                             </li>
                             <li>
-                                <a href="auth-login-2.html">Log In 2</a>
+                                <router-link to='/auth-login-2'>Log In 2</router-link>
                             </li>
                             <li>
-                                <a href="auth-register.html">Register</a>
+                                <router-link to='/auth-register'>Register</router-link>
                             </li>
                             <li>
-                                <a href="auth-register-2.html">Register 2</a>
+                                <router-link to='/auth-register-2'>Register 2</router-link>
                             </li>
                             <li>
-                                <a href="auth-signin-signup.html">Signin - Signup</a>
+                                <router-link to='/auth-signin-signup'>Signin - Signup</router-link>
                             </li>
                             <li>
-                                <a href="auth-signin-signup-2.html">Signin - Signup 2</a>
+                                <router-link to='/auth-signin-signup-2'>Signin - Signup 2</router-link>
                             </li>
                             <li>
-                                <a href="auth-recoverpw.html">Recover Password</a>
+                                <router-link to='/auth-recoverpw'>Recover Password</router-link>
                             </li>
                             <li>
-                                <a href="auth-recoverpw-2.html">Recover Password 2</a>
+                                <router-link to='/auth-recoverpw-2'>Recover Password 2</router-link>
                             </li>
                             <li>
-                                <a href="auth-lock-screen.html">Lock Screen</a>
+                                <router-link to='/auth-lock-screen'>Lock Screen</router-link>
                             </li>
                             <li>
-                                <a href="auth-lock-screen-2.html">Lock Screen 2</a>
+                                <router-link to='/auth-lock-screen-2'>Lock Screen 2</router-link>
                             </li>
                             <li>
-                                <a href="auth-logout.html">Logout</a>
+                                <router-link to='/auth-logout'>Logout</router-link>
                             </li>
                             <li>
-                                <a href="auth-logout-2.html">Logout 2</a>
+                                <router-link to='/auth-logout-2'>Logout 2</router-link>
                             </li>
                             <li>
-                                <a href="auth-confirm-mail.html">Confirm Mail</a>
+                                <router-link to='/auth-confirm-mail'>Confirm Mail</router-link>
                             </li>
                             <li>
-                                <a href="auth-confirm-mail-2.html">Confirm Mail 2</a>
+                                <router-link to='/auth-confirm-mail-2'>Confirm Mail 2</router-link>
                             </li>
                         </ul>
                     </div>
@@ -339,49 +340,49 @@ rr<template>
                     <div class="collapse" id="sidebarExpages">
                         <ul class="nav-second-level">
                             <li>
-                                <a href="pages-starter.html">Starter</a>
+                                <router-link to='/pages-starter'>Starter</router-link>
                             </li>
                             <li>
-                                <a href="pages-timeline.html">Timeline</a>
+                                <router-link to='/pages-timeline'>Timeline</router-link>
                             </li>
                             <li>
-                                <a href="pages-sitemap.html">Sitemap</a>
+                                <router-link to='/pages-sitemap'>Sitemap</router-link>
                             </li>
                             <li>
-                                <a href="pages-invoice.html">Invoice</a>
+                                <router-link to='/pages-invoice'>Invoice</router-link>
                             </li>
                             <li>
-                                <a href="pages-faqs.html">FAQs</a>
+                                <router-link to='/pages-faqs'>FAQs</router-link>
                             </li>
                             <li>
-                                <a href="pages-search-results.html">Search Results</a>
+                                <router-link to='/pages-search-results'>Search Results</router-link>
                             </li>
                             <li>
-                                <a href="pages-pricing.html">Pricing</a>
+                                <router-link to='/pages-pricing'>Pricing</router-link>
                             </li>
                             <li>
-                                <a href="pages-maintenance.html">Maintenance</a>
+                                <router-link to='/pages-maintenance'>Maintenance</router-link>
                             </li>
                             <li>
-                                <a href="pages-coming-soon.html">Coming Soon</a>
+                                <router-link to='/pages-coming-soon'>Coming Soon</router-link>
                             </li>
                             <li>
-                                <a href="pages-gallery.html">Gallery</a>
+                                <router-link to='/pages-gallery'>Gallery</router-link>
                             </li>
                             <li>
-                                <a href="pages-404.html">Error 404</a>
+                                <router-link to='/pages-404'>Error 404</router-link>
                             </li>
                             <li>
-                                <a href="pages-404-two.html">Error 404 Two</a>
+                                <router-link to='/pages-404-two'>Error 404 Two</router-link>
                             </li>
                             <li>
-                                <a href="pages-404-alt.html">Error 404-alt</a>
+                                <router-link to='/pages-404-alt'>Error 404-alt</router-link>
                             </li>
                             <li>
-                                <a href="pages-500.html">Error 500</a>
+                                <router-link to='/pages-500'>Error 500</router-link>
                             </li>
                             <li>
-                                <a href="pages-500-two.html">Error 500 Two</a>
+                                <router-link to='/pages-500-two'>Error 500 Two</router-link>
                             </li>
                         </ul>
                     </div>
@@ -771,9 +772,7 @@ rr<template>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

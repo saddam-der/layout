@@ -19,11 +19,14 @@
     "@fullcalendar/vue": "^5.3.1",
     "apexcharts": "^3.22.1",
     "jquery": "^3.5.1",
+    "jsvectormap": "^1.1.4",
     "jvectormap": "^2.0.4",
     "vue": "^2.5.2",
     "vue-apexcharts": "^1.6.0",
     "vue-morris": "^1.1.0",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuevectormap": "^1.0.4",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

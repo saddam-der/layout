@@ -33,7 +33,7 @@
                                 <img src="../../../assets/images/users/user-1.jpg" class="mr-2 rounded-circle" height="42" alt="Brandon Smith" />
                                 <div class="media-body">
                                     <h5 class="mt-0 mb-0 font-15">
-                                        <a href="contacts-profile.html" class="text-reset">Geneva McKnight</a>
+                                        <router-link to='/contacts-profile' class="text-reset">Geneva McKnight</router-link>
                                     </h5>
                                     <p class="mt-1 mb-0 text-muted font-13">
                                         <small class="mdi mdi-circle text-success"></small>
@@ -225,7 +225,7 @@
                                 <img src="../../../assets/images/users/user-5.jpg" class="mr-2 rounded-circle" height="36" alt="Brandon Smith" />
                                 <div class="media-body">
                                     <h5 class="mt-0 mb-0 font-15">
-                                        <a href="contacts-profile.html" class="text-reset">James Zavel</a>
+                                        <router-link to='/contacts-profile' class="text-reset">James Zavel</router-link>
                                     </h5>
                                     <p class="mt-1 mb-0 text-muted font-12">
                                         <small class="mdi mdi-circle text-success"></small>
