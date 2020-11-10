@@ -139,7 +139,7 @@ import resourceTimelinePlugin from '@fullcalendar/resource-timeline'
 
 export default {
     components: {
-        FullCalendar // make the <FullCalendar> tag available
+        FullCalendar
     },
     data() {
         return {
@@ -163,8 +163,8 @@ export default {
         handleDateClick: function (arg) {
             alert('date click! ' + arg.dateStr)
         }
-    }
-}
+    },
+};
 </script>
 
 <style>

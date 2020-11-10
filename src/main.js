@@ -3,20 +3,37 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
+import store from "./store";
 import VueApexCharts from 'vue-apexcharts'
 import Raphael from 'raphael/raphael'
 import VueVectorMap from 'vuevectormap'
+import VModal from 'vue-js-modal'
+import VueGoodTablePlugin from 'vue-good-table';
+import { BootstrapVue } from 'bootstrap-vue'
+import vSelect from 'vue-select'
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import VueSweetalert2 from 'vue-sweetalert2';
+
 global.Raphael = Raphael
 
-
-Vue.component('apexchart', VueApexCharts)
-
-// Import your preferred map
 require('jsvectormap/dist/maps/world')
 
+Vue.component('v-select', vSelect)
+Vue.component('apexchart', VueApexCharts)
+
+Vue.use(VueSweetalert2);
+Vue.use(BootstrapVue)
+Vue.use(VModal)
 Vue.use(VueApexCharts)
 Vue.use(VueVectorMap)
+Vue.use(VueGoodTablePlugin)
+Vue.use( CKEditor );
 
+import 'sweetalert2/dist/sweetalert2.min.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vue-good-table/dist/vue-good-table.css'
+import 'vue-select/dist/vue-select.css';
 // You can set defaults globally
 Vue.use(VueVectorMap, {
   map: 'world',
@@ -32,6 +49,7 @@ Vue.config.productionTip = false;
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>',
 });

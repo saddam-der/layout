@@ -13,6 +13,12 @@ import Dashboard2 from '@/components/navigation/dashboard/dashboard-2';
 import Dashboard3 from '@/components/navigation/dashboard/dashboard-3';
 import Dashboard4 from '@/components/navigation/dashboard/dashboard-4';
 
+import disasterList from '@/components/bencana/disaster-list.vue';
+import disasterAdd from '@/components/bencana/disaster-add.vue';
+
+import productList from '@/components/product/product-list';
+import productAdd from '@/components/product/product-add';
+
 //----------------------------Apps-------------
 //Calendar
 import Calendar from '@/components/apps/Calendar/Calendar';
@@ -197,6 +203,51 @@ export default new Router({
   routes: [
 
     //---------------Navigation---------
+    //Product
+    {
+      path: '/product-list',
+      name: 'productList',
+      components: {
+        navbar: Navbar,
+        default: productList,
+        footer: Footer,
+        leftsidebar: LeftSidebar,
+        rightsidebar: RightSidebar,
+      }
+    },
+    {
+      path: '/product-add',
+      name: 'productAdd',
+      components: {
+        navbar: Navbar,
+        default: productAdd,
+        footer: Footer,
+        leftsidebar: LeftSidebar,
+        rightsidebar: RightSidebar,
+      }
+    },
+    {
+      path: '/disasterAdd',
+      name: 'disasterAdd',
+      components: {
+        navbar: Navbar,
+        default: disasterAdd,
+        footer: Footer,
+        leftsidebar: LeftSidebar,
+        rightsidebar: RightSidebar,
+      }
+    },
+    {
+      path: '/disasterList',
+      name: 'disasterList',
+      components: {
+        navbar: Navbar,
+        default: disasterList,
+        footer: Footer,
+        leftsidebar: LeftSidebar,
+        rightsidebar: RightSidebar,
+      }
+    },
     {
       path: '/',
       name: 'Dashboard-1',

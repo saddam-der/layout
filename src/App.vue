@@ -1,12 +1,12 @@
 <template>
 <div id="app">
-  <div id="wrapper">
-    <Navbar />
-    <router-view />
-    <Footer />
-    <LeftSidebar />
-    <RightSidebar />
-  </div>
+    <div id="wrapper">
+        <Navbar />
+        <router-view />
+        <Footer />
+        <LeftSidebar />
+        <RightSidebar />
+    </div>
 </div>
 </template>
 
@@ -17,13 +17,13 @@ import RightSidebar from './components/Layout/RightSidebar.vue'
 import Footer from '@/components/Layout/Footer'
 
 export default {
-  name: 'App',
-  components: {
-    Navbar,
-    LeftSidebar,
-    RightSidebar,
-    Footer,
-  },
+    name: 'App',
+    components: {
+        Navbar,
+        LeftSidebar,
+        RightSidebar,
+        Footer,
+    },
 };
 </script>
 
@@ -34,4 +34,5 @@ export default {
 @import './assets/css/bootstrap-purple.min.css';
 @import './assets/css/app-purple.min.css';
 @import './assets/css/icons.min.css';
+@import './assets/libs/bootstrap-table/bootstrap-table.min.css';
 </style>

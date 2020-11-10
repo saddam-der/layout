@@ -4,7 +4,8 @@
 // require('../dist/libs/selectize/js/standalone/selectize.min.js')
 
 //Navigation
-// require('../dist/js/pages/dashboard-1.init.js')
+
+
 
 
 // require('../dist/libs/jquery-sparkline/jquery.sparkline.min.js')

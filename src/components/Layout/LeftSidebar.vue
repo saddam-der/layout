@@ -64,15 +64,40 @@ rr<template>
                         </ul>
                     </div>
                 </li>
-
-                <li class=" menu-title mt-2">Apps
-                </li>
-
+                <li class=" menu-title mt-2">Apps</li>
                 <li>
-                    <router-link to="/calendar">
-                        <i class="mdi mdi-calendar"></i>
-                        <span> Calendar </span>
-                    </router-link>
+                    <a href="#sidebarProduct" data-toggle="collapse">
+                        <i class="mdi mdi-cart-outline"></i>
+                        <span> Product </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarProduct">
+                        <ul class="nav-second-level">
+                            <li>
+                                <router-link to="/product-list">List</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/product-add">Add Product</router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#sidebarBencana" data-toggle="collapse">
+                        <i class="mdi mdi-terrain"></i>
+                        <span> Bencana </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebarBencana">
+                        <ul class="nav-second-level">
+                            <li>
+                                <router-link to="/disasterList">List</router-link>
+                            </li>
+                            <li>
+                                <router-link to="/disasterAdd">Add Disaster</router-link>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
                 <li>
@@ -619,28 +644,28 @@ rr<template>
                     <div class="collapse" id="sidebarTables">
                         <ul class="nav-second-level">
                             <li>
-                                <router-link to='/tables-basic'>Basic Tables></router-link>
+                                <router-link to='/table-basic'>Basic Tables></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-datatables'>Data Tables></router-link>
+                                <router-link to='/table-datatables'>Data Tables></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-editable'>Editable Tables></router-link>
+                                <router-link to='/table-editable'>Editable Tables></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-responsive'>Responsive Tables></router-link>
+                                <router-link to='/table-responsive'>Responsive Tables></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-footables'>FooTable></router-link>
+                                <router-link to='/table-footables'>FooTable></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-bootstrap'>Bootstrap Tables></router-link>
+                                <router-link to='/table-bootstrap'>Bootstrap Tables></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-tablesaw'>Tablesaw Tables></router-link>
+                                <router-link to='/table-tablesaw'>Tablesaw Tables></router-link>
                             </li>
                             <li>
-                                <router-link to='/tables-jsgrid'>JsGrid Tables></router-link>
+                                <router-link to='/table-jsgrid'>JsGrid Tables></router-link>
                             </li>
                         </ul>
                     </div>

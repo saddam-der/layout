@@ -23,10 +23,8 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js',
-    vendor: './src/vendor.js',
     vendora: './dist/js/vendor.min.js',
     appa: './dist/js/app.min.js',
-    // libs: './dist/libs/',
   },
   output: {
     path: config.build.assetsRoot,
