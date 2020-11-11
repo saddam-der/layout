@@ -2,7 +2,23 @@
 <div class="content-page">
     <div class="content">
         <div class="container-fluid">
-            <vue-good-table :columns="columns" :rows="data" :search-options="{ enabled: true }" :pagination-options="{ enabled: true, mode: 'records', perPage: 100, position: 'top', }">
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
+                                <li class="breadcrumb-item"><a href="javascript: void(0);">Disaster</a></li>
+                                <li class="breadcrumb-item active">Disaster List</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">List Disaster</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+            <vue-good-table :columns="columns" :rows="data" :search-options="{ enabled: true }" :pagination-options="{ enabled: true, mode: 'records', perPage: 5, position: 'top', }">
                 <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'image'">
                         <img :src="props.row.image" width="100px">

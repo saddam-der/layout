@@ -19,7 +19,7 @@
                 </div>
             </div>
             <!-- end page title -->
-            <form @submit.prevent="add">
+            <form @submit.prevent="">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card-box">
@@ -32,35 +32,55 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Category<span class="text-danger">*</span></label>
-                                <select class="form-control" v-model="form.category_id">
+                                <v-select label="name" :options="categorya" v-model="form.category_id">
+                                    <template #search="{attributes, events}">
+                                        <input class="vs__search" :required="!form.category_id" v-bind="attributes" v-on="events" />
+                                    </template>
+                                </v-select>
+                                <!-- <select class="form-control" v-model="form.category_id">
                                     <option v-for="option in categorya" :key="option.id" v-bind:value="option.id">
                                         {{ option.name }}
                                     </option>
-                                </select>
+                                </select> -->
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-province">Province<span class="text-danger">*</span></label>
-                                <select class="form-control" v-model="form.province_id">
+                                <v-select label="name" :options="provincea" v-model="form.province_id">
+                                    <template #search="{attributes, events}">
+                                        <input class="vs__search" :required="!form.province_id" v-bind="attributes" v-on="events" />
+                                    </template>
+                                </v-select>
+                                <!-- <select class="form-control" v-model="form.province_id" required>
                                     <option v-for="option in provincea" :key="option.id" v-bind:value="option.id">
                                         {{ option.name }}
                                     </option>
-                                </select>
+                                </select> -->
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-city">City<span class="text-danger">*</span></label>
-                                <select class="form-control" v-model="form.city_id">
+                                <v-select label="name" :options="citya" v-model="form.city_id">
+                                    <template #search="{attributes, events}">
+                                        <input class="vs__search" :required="!form.city_id" v-bind="attributes" v-on="events" />
+                                    </template>
+                                </v-select>
+                                <!-- <select class="form-control" v-model="form.city_id">
                                     <option v-for="option in citya" :key="option.id" v-bind:value="option.id">
                                         {{ option.name }}
                                     </option>
-                                </select>
+                                </select> -->
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-Subdistrict">Subdistrict<span class="text-danger">*</span></label>
-                                <select class="form-control" v-model="form.sub_district_id">
+                                <v-select label="name" :options="subdistricta" v-model="form.sub_district_id">
+                                    <template #search="{attributes, events}">
+                                        <input class="vs__search" :required="!form.sub_district_id" v-bind="attributes" v-on="events" />
+                                    </template>
+                                </v-select>
+                                <!-- <select class="form-control" v-model="form.sub_district_id">
                                     <option v-for="option in subdistricta" :key="option.id" v-bind:value="option.id">
                                         {{ option.name }}
                                     </option>
-                                </select>
+                                </select> -->
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Story<span class="text-danger">*</span></label>

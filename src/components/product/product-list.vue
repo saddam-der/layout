@@ -203,7 +203,7 @@ export default {
     },
     methods: {
         async load() {
-            await axios.get('https://api-galangbantuan.matamantra.com/product').then((response) => {
+            await axios.get('https://api-galangbantuan.matamantra.com/product?page=1&limit=10').then((response) => {
                 for (var i = 0; i < response.data.data.length; i += 1) {
                     response.data.data[i].image = JSON.parse(response.data.data[i].image)
                     this.data.push(response.data.data[i])

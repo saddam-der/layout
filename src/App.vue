@@ -2,7 +2,7 @@
 <div id="app">
     <div id="wrapper">
         <Navbar />
-        <router-view />
+            <router-view />
         <Footer />
         <LeftSidebar />
         <RightSidebar />
