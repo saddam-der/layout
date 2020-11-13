@@ -38,73 +38,11 @@
                                                 <img :src="props.row.image.img4" alt="" width="140px">
                                             </span>
                                             <span v-else-if="props.column.field == 'action'">
-                                                <button class="btn btn-warning" data-toggle="modal" data-target="#modalEdit"><i class="mdi mdi-pencil" @click="getProduct(props.row)"></i></button>
+                                                <router-link :to="{ name: 'productEdit', params: { id: props.row.id } }"><button class="btn btn-warning"><i class="mdi mdi-pencil"></i></button></router-link>
                                                 <button class="btn btn-danger" @click="deleteProduct(props.row)"><i class="mdi mdi-delete"></i></button>
                                             </span>
                                         </template>
                                     </vue-good-table>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form @submit.prevent="editProduct">
-                                                        <div class="form-row">
-                                                            <div class="col-md-6">
-                                                                <input type="hidden" class="form-control" id="idProduct" v-model="formEditId" required>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editName">Name</label>
-                                                                    <input type="text" class="form-control" id="editName" v-model="formEditName" required>
-                                                                </div>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editDescription">Description</label>
-                                                                    <ckeditor :editor="editor" v-model="formEditDescription"></ckeditor>
-                                                                </div>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editCategory">Category</label>
-                                                                    <select class="custom-select" id="editCategory" v-model="formEditCategory" required>
-                                                                        <option v-for="option in listCategory" :key="option.id" v-bind:value="option.id">
-                                                                            {{ option.name }}
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editQuantity">Quantity</label>
-                                                                    <input type="number" class="form-control" id="editQuantity" v-model="formEditQty" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editMinimum">Minimum</label>
-                                                                    <input type="number" class="form-control" id="editMinimum" v-model="formEditMinimum" required>
-                                                                </div>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editAmount">Amount</label>
-                                                                    <input type="number" class="form-control" id="editAmount" v-model="formEditAmount" required>
-                                                                </div>
-                                                                <div class="col-md-12 mb-3">
-                                                                    <label for="editImage">Image</label>
-                                                                    <input type="text" class="form-control" id="editImage" v-model="formEditImage" required>
-                                                                    <img :src="formEditImage" alt="" width="60px">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-primary">Save changes</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <!-- container -->
@@ -122,6 +60,7 @@
 <script>
 import axios from 'axios'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import vue2Dropzone from 'vue2-dropzone'
 
 export default {
     data() {
@@ -179,20 +118,6 @@ export default {
             listCategory: [],
             category: "",
             sortCategory: false,
-            inputID: "",
-
-            formEditId: "",
-            formEditName: "",
-            formEditImage: "",
-            formEditDescription: "",
-            formEditAmount: "",
-            formEditQty: "",
-            formEditMinimum: "",
-            formEditCategory: "",
-            formEditCondition: "",
-            formEditMethod: "",
-
-            editor: ClassicEditor,
         }
     },
     computed: {},
@@ -203,7 +128,7 @@ export default {
     },
     methods: {
         async load() {
-            await axios.get('https://api-galangbantuan.matamantra.com/product').then((response) => {
+            await axios.get('https://api-galangbantuan.matamantra.com/product?page=1&limit=10').then((response) => {
                 for (var i = 0; i < response.data.data.length; i += 1) {
                     response.data.data[i].image = JSON.parse(response.data.data[i].image)
                     this.data.push(response.data.data[i])
@@ -285,6 +210,9 @@ export default {
         sortByID() {
             this.sortCategory = this.sortCategory == false
         }
+    },
+    components: {
+        vueDropzone: vue2Dropzone,
     }
 }
 </script>

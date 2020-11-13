@@ -74,10 +74,10 @@ rr<template>
                     <div class="collapse" id="sidebarProduct">
                         <ul class="nav-second-level">
                             <li>
-                                <router-link to="/product-list">List</router-link>
+                                <router-link to="/product">List</router-link>
                             </li>
                             <li>
-                                <router-link to="/product-add">Add Product</router-link>
+                                <router-link to="/product/add">Add Product</router-link>
                             </li>
                         </ul>
                     </div>
@@ -91,10 +91,10 @@ rr<template>
                     <div class="collapse" id="sidebarBencana">
                         <ul class="nav-second-level">
                             <li>
-                                <router-link to="/disasterList">List</router-link>
+                                <router-link to="/disaster">List</router-link>
                             </li>
                             <li>
-                                <router-link to="/disasterAdd">Add Disaster</router-link>
+                                <router-link to="/disaster/add">Add Disaster</router-link>
                             </li>
                         </ul>
                     </div>

@@ -15,9 +15,12 @@ import Dashboard4 from '@/components/navigation/dashboard/dashboard-4';
 
 import disasterList from '@/components/bencana/disaster-list.vue';
 import disasterAdd from '@/components/bencana/disaster-add.vue';
+import disasterEdit from '@/components/bencana/disaster-edit.vue';
 
+//Product
 import productList from '@/components/product/product-list';
 import productAdd from '@/components/product/product-add';
+import productEdit from '@/components/product/product-edit'
 
 //----------------------------Apps-------------
 //Calendar
@@ -205,7 +208,7 @@ export default new Router({
     //---------------Navigation---------
     //Product
     {
-      path: '/product-list',
+      path: '/product',
       name: 'productList',
       components: {
         navbar: Navbar,
@@ -216,7 +219,7 @@ export default new Router({
       }
     },
     {
-      path: '/product-add',
+      path: '/product/add',
       name: 'productAdd',
       components: {
         navbar: Navbar,
@@ -227,7 +230,29 @@ export default new Router({
       }
     },
     {
-      path: '/disasterAdd',
+      path: '/product/edit/:id',
+      name: 'productEdit',
+      components: {
+        navbar: Navbar,
+        default: productEdit,
+        footer: Footer,
+        leftsidebar: LeftSidebar,
+        rightsidebar: RightSidebar,
+      }
+    },
+    {
+      path: '/disaster',
+      name: 'disasterList',
+      components: {
+        navbar: Navbar,
+        default: disasterList,
+        footer: Footer,
+        leftsidebar: LeftSidebar,
+        rightsidebar: RightSidebar,
+      }
+    },
+    {
+      path: '/disaster/add',
       name: 'disasterAdd',
       components: {
         navbar: Navbar,
@@ -238,11 +263,11 @@ export default new Router({
       }
     },
     {
-      path: '/disasterList',
-      name: 'disasterList',
+      path: '/disaster/edit/:id',
+      name: 'disasterEdit',
       components: {
         navbar: Navbar,
-        default: disasterList,
+        default: disasterEdit,
         footer: Footer,
         leftsidebar: LeftSidebar,
         rightsidebar: RightSidebar,

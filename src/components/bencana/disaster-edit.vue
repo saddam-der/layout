@@ -11,87 +11,69 @@
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
                                 <li class="breadcrumb-item"><a href="javascript: void(0);">Bencana</a></li>
-                                <li class="breadcrumb-item active">Disaster Add</li>
+                                <li class="breadcrumb-item active">Disaster Edit</li>
                             </ol>
                         </div>
-                        <h4 class="page-title">Disaster / Entri</h4>
+                        <h4 class="page-title">Disaster Edit</h4>
+                        {{ data.notes }}
+
                     </div>
                 </div>
             </div>
             <!-- end page title -->
-            <form @submit.prevent="add">
+            <form @submit.prevent="">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card-box">
                             <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">GENERAL</h5>
-
+                            <input type="hidden">
                             <div class="form-group mb-3">
                                 <label for="bencana-name">Name<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" v-model="form.name" required>
+                                <input type="text" class="form-control" v-bind:value="data.name" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Category<span class="text-danger">*</span></label>
-                                <!-- <v-select label="name" :options="categorya" v-model="form.category_id">
-                                    <template #search="{ attributes, events }">
+                                <v-select label="name" :options="categorya">
+                                    <template #search="{attributes, events}">
                                         <input class="vs__search" :required="!form.category_id" v-bind="attributes" v-on="events" />
                                     </template>
-                                </v-select>-->
-                                <select class="form-control" v-model="form.category_id">
-                                    <option v-for="option in categorya" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                </v-select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-province">Province<span class="text-danger">*</span></label>
-                                <!--<v-select label="name" :options="provincea" v-model="form.province_id">
+                                <v-select label="name" :options="provincea">
                                     <template #search="{attributes, events}">
                                         <input class="vs__search" :required="!form.province_id" v-bind="attributes" v-on="events" />
                                     </template>
-                                </v-select>-->
-                                <select class="form-control" v-model="form.province_id">
-                                    <option v-for="option in provincea" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                </v-select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-city">City<span class="text-danger">*</span></label>
-                                <!--<v-select label="name" :options="citya" v-model="form.city_id">
+                                <v-select label="name" :options="citya">
                                     <template #search="{attributes, events}">
                                         <input class="vs__search" :required="!form.city_id" v-bind="attributes" v-on="events" />
                                     </template>
-                                </v-select> -->
-                                <select class="form-control" v-model="form.city_id">
-                                    <option v-for="option in citya" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                </v-select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-Subdistrict">Subdistrict<span class="text-danger">*</span></label>
-                                <!--<v-select label="name" :options="subdistricta" v-model="form.sub_district_id">
+                                <v-select label="name" :options="subdistricta">
                                     <template #search="{attributes, events}">
                                         <input class="vs__search" :required="!form.sub_district_id" v-bind="attributes" v-on="events" />
                                     </template>
-                                </v-select>-->
-                                <select class="form-control" v-model="form.sub_district_id">
-                                    <option v-for="option in subdistricta" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                </v-select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Story<span class="text-danger">*</span></label>
-                                <ckeditor :editor="editor" v-model="form.story"></ckeditor>
+                                <ckeditor :editor="editor" v-bind:value="data.story"></ckeditor>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Description<span class="text-danger">*</span></label>
-                                <textarea class="form-control" cols="30" rows="5" v-model="form.description" required></textarea>
+                                <textarea class="form-control" v-bind:value="data.description" cols="30" rows="5" required></textarea>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Address<span class="text-danger">*</span></label>
-                                <textarea class="form-control" cols="30" rows="5" v-model="form.address"></textarea>
+                                <textarea class="form-control" v-bind:value="data.address" cols="30" rows="5"> </textarea>
                             </div>
                         </div> <!-- end card-box -->
                     </div> <!-- end col -->
@@ -99,26 +81,27 @@
                         <div class="card-box">
                             <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">IMAGE</h5>
                             <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                            <img :src="data.image" alt="" width="270px" class="pt-3">
                         </div>
                         <div class="card-box">
                             <div class="form-group mb-3">
                                 <label for="product-name">Noted<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" v-model="form.notes">
+                                <input type="text" v-bind:value="data.notes" class="form-control">
                             </div>
                             <div class="form-group mb-3">
-                                <input type="hidden" class="form-control" v-model="form.status">
+                                <input type="hidden" class="form-control">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Injured<span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" v-model="form.injured">
+                                <input type="number" v-bind:value="data.injured" class="form-control">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Died<span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" v-model="form.died">
+                                <input type="number" v-bind:value="data.died" class="form-control">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Mobile No<span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" v-model="form.mobile_no">
+                                <input type="number" v-bind:value="data.mobile_no" class="form-control">
                             </div>
                         </div>
                         <div class="row">
@@ -152,63 +135,81 @@ export default {
             provincea: [],
             citya: [],
             subdistricta: [],
-            form: {
-                name: '',
-                category_id: '',
-                description: '',
-                story: '',
-                lat: -6.292849,
-                lng: 106.793207,
-                province_id: '',
-                city_id: '',
-                sub_district_id: '',
-                address: '',
-                notes: '',
-                image: 'test',
-                mobile_no: '',
-                status: true,
-                injured: '',
-                died: '',
-                last_desc: 'test',
-                time: '2020/10/10 00:00:00',
-                verified: 'APPROVED',
-                user_id: 1,
-            },
+            data: [],
             dropzoneOptions: {
                 url: 'https://httpbin.org/post',
                 thumbnailWidth: 200,
                 addRemoveLinks: true,
                 dictDefaultMessage: "UPLOAD IMAGE"
             },
+            form: {
+                category_id: '',
+                province_id: '',
+                city_id: '',
+                sub_district_id: '',
+            },
+
         }
     },
-    mounted() {
+    async mounted() {
+        this.load()
         this.category()
         this.province()
         this.city()
         this.subdistrict()
     },
+    created() {
+        this.id = this.$route.params.id;
+    },
     methods: {
         async category() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/category')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/disaster/category')
             this.categorya = response.data.data
         },
         async province() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/province')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/province')
             this.provincea = response.data.data
         },
         async city() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/city')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/city')
             this.citya = response.data.data
         },
         async subdistrict() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/subdistrict')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/subdistrict')
             this.subdistricta = response.data.data
         },
-        add() {
-            axios.post('https://c2fc1e3ef947.ngrok.io/disaster/action/add', this.form).then(res => {
-
-            })
+        async load() {
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/disaster/' + this.id)
+            this.data = response.data.data
+        },
+        // async load() {
+        //     await axios.get('https://api-galangbantuan.matamantra.com/disaster/' + this.id).then((response) => {
+        //         // this.data = response.data.data
+        //         for (var i = 0; i < response.data.data.length; i += 1) {
+        //             response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
+        //             this.data.push(response.data.data[i])
+        //         }
+        //     })
+        // },
+        update() {
+            axios.put('https://api-galangbantuan.matamantra.com/disaster/' + this.id + '/action/update', {
+                    name: this.formEdit.nameEdit,
+                    category_id: this.formEdit.category_idEdit,
+                    description: this.formEdit.descriptionEdit,
+                    story: this.formEdit.storyEdit,
+                    province_id: this.formEdit.province_idEdit,
+                    city_id: this.formEdit.city_idEdit,
+                    sub_district_id: this.formEdit.sub_district_idEdit,
+                    address: this.formEdit.addressEdit,
+                    notes: this.formEdit.notesEdit,
+                    mobile_no: this.formEdit.mobile_noEdit,
+                    injured: this.formEdit.injuredEdit,
+                    died: this.formEdit.diedEdit,
+                })
+                .then(res => {
+                    // handle success
+                    this.load()
+                })
         },
     },
     components: {

@@ -66,7 +66,6 @@
                                 <label for="product-condition">Condition <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="product-condition" v-model="productCondition" placeholder="Enter Condition">
                             </div>
-
                             <div class="form-group mb-3">
                                 <label for="product-method">Method <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="product-method" v-model="productMethod" placeholder="Enter Method">
@@ -146,7 +145,6 @@ import vue2Dropzone from 'vue2-dropzone'
 // require('../../../../dist/libs/dropzone/min/dropzone.min.js');
 // require('../../../../dist/js/pages/form-fileuploads.init.js');
 // require('../../../../dist/js/pages/add-product.init.js');
-
 export default {
     data() {
         return {
