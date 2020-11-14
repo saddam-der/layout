@@ -99,7 +99,20 @@ rr<template>
                         </ul>
                     </div>
                 </li>
-
+                <li>
+                    <a href="#sidebartest" data-toggle="collapse">
+                        <i class="mdi mdi-terrain"></i>
+                        <span> Test </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="sidebartest">
+                        <ul class="nav-second-level" v-for="test in data" :key="test.id">
+                            <li>
+                                <router-link to="/disaster">{{ test.name }}</router-link>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <router-link to="/chat">
                         <i class="mdi mdi-forum-outline"></i>
@@ -797,7 +810,30 @@ rr<template>
 </template>
 
 <script>
-export default {}
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            data: [],
+        }
+    },
+
+    mounted() {
+        this.load()
+    },
+
+    methods: {
+        async load() {
+            await axios.get('https://c2fc1e3ef947.ngrok.io/disaster?page=1&limit=100').then((response) => {
+                for (var i = 0; i < response.data.data.length; i++) {
+                    response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
+                    this.data.push(response.data.data[i])
+                    // this.data = response.data.data
+                }
+            })
+        },
+    }
+}
 </script>
 
 <style>

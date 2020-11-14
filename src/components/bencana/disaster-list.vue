@@ -14,6 +14,7 @@
                             </ol>
                         </div>
                         <h4 class="page-title">List Disaster</h4>
+
                     </div>
                 </div>
             </div>
@@ -29,7 +30,7 @@
                     </span>
                     <span v-else-if="props.column.field == 'action'">
                         <router-link :to="{ name: 'disasterEdit', params: { id: props.row.id } }"><button class="btn btn-warning"><i class="mdi mdi-pencil"></i></button></router-link>
-                        <button @click="deleteDisplay" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
+                        <button @click="deleteDisplay(props.row)" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>
                     </span>
                 </template>
             </vue-good-table>
@@ -267,7 +268,7 @@ export default {
     },
 
     methods: {
-        deleteDisplay() {
+        deleteDisplay(row) {
             this.$swal({
                 title: 'Are you sure?',
                 text: 'You can\'t revert your action',
@@ -300,9 +301,19 @@ export default {
         //     })
         // },
         async load() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster')
-            this.data = response.data.data
+            await axios.get('https://c2fc1e3ef947.ngrok.io/disaster?page=1&limit=100').then((response) => {
+                for (var i = 0; i < response.data.data.length; i++) {
+                    response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
+                    // // this.data.push(response.data.data[i])
+                    // this.data = response.data.data
+                    // console.log(this.data = response.data.data)
+                }
+            })
         },
+        // async load() {
+        //     const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster')
+        //     this.data = response.data.data
+        // },
         async category() {
             const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/category')
             this.categorya = response.data.data
