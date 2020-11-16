@@ -308,16 +308,6 @@ export default {
         //     })
         // },
         // async load() {
-        //     await axios.get('https://c2fc1e3ef947.ngrok.io/disaster?page=1&limit=100').then((response) => {
-        //         for (var i = 0; i < response.data.data.length; i++) {
-        //             response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
-        //             // // this.data.push(response.data.data[i])
-        //             // this.data = response.data.data
-        //             // console.log(this.data = response.data.data)
-        //         }
-        //     })
-        // },
-        // async load() {
         //     const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster')
         //     this.data = response.data.data
         // },

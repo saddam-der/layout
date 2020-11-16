@@ -15,8 +15,6 @@
                             </ol>
                         </div>
                         <h4 class="page-title">Disaster Edit</h4>
-                        {{ data.notes }}
-
                     </div>
                 </div>
             </div>

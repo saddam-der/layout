@@ -37,7 +37,7 @@
                                     </template>
                                 </v-select>-->
                                 <select class="form-control" v-model="form.category_id">
-                                    <option v-for="option in categorya" :key="option.id" v-bind:value="option.id">
+                                    <option v-for="option in categoryzxc" :key="option.id" v-bind:value="option.id">
                                         {{ option.name }}
                                     </option>
                                 </select>
@@ -148,7 +148,7 @@ export default {
         return {
             editor: ClassicEditor,
             myValue: '',
-            categorya: [],
+            // categorya: [],
             provincea: [],
             citya: [],
             subdistricta: [],
@@ -182,17 +182,25 @@ export default {
             },
         }
     },
-    mounted() {
-        this.category()
+
+    computed: {
+        categoryzxc() {
+            return this.$store.state.category;
+        }
+    },
+
+    async mounted() {
+        this.$store.dispatch('loadCategory');
+        // this.category()
         this.province()
         this.city()
         this.subdistrict()
     },
     methods: {
-        async category() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/category')
-            this.categorya = response.data.data
-        },
+        // async category() {
+        //     const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/category')
+        //     this.categorya = response.data.data
+        // },
         async province() {
             const response = await axios.get('https://c2fc1e3ef947.ngrok.io/province')
             this.provincea = response.data.data
