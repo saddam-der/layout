@@ -1,65 +1,29 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    listPesan: [{
-        id: 1,
-        makanan: 'Batagor',
-        minuman: 'Es teh',
-        opsipesan: 'Dibungkus',
-        gambar: 'end.jpg'
-      },
-      {
-        id: 2,
-        makanan: 'Somay',
-        minuman: 'Es Jeruk',
-        opsipesan: 'Makan disini',
-        gambar: 'end.jpg'
-      },
-      {
-        id: 3,
-        makanan: 'Mie Ayam',
-        minuman: 'Es Campur',
-        opsipesan: 'Dibungkus',
-        gambar: 'end.jpg'
-      },
-    ],
+    data: []
   },
   mutations: {
-    tambahPesan(state, pesan) {
-      state.listPesan.push(pesan)
-    },
-    hapusPesan(state, id) {
-      state.listPesan = state.listPesan.filter(pesan => pesan.id != id);
-    },
-    ubahPesan(state, id) {
-      // state.listPesan = state.listPesan.filter(pesan => pesan.id != id);
-      const elementsIndex = this.state.listPesan.findIndex(pesan => pesan.id == id )
-      let newArray = [...this.state.listPesan]
-      newArray[elementsIndex] = {...newArray[elementsIndex], completed: !newArray[elementsIndex].completed}
-      this.setState({
-        listPesan: newArray,
-        });
-    },
-    
+    SET_DATA(state, data){
+      state.data = data
+    }
   },
   actions: {
-    addPesan({ commit }, pesan) {
-      commit('tambahPesan', pesan);
-    },
-    deletePesan({ commit }, id) {
-      commit('hapusPesan', id);
-    },
-    editPesan({commit}, id) {
-      commit('ubahPesan', id);
-    },
+    loadData({ commit }) {
+      axios.get('https://c2fc1e3ef947.ngrok.io/disaster?page=1&limit=100').then((response) => {
+        for (var i = 0; i < response.data.data.length; i++) {
+          response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
+        }
+        commit('SET_DATA', response.data.data)
+      })
+    }
   },
   modules: {},
   getters: {
-    daftarPesan(state) {
-      return state.listPesan;
-    },
+
   }
 });
