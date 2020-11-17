@@ -13,6 +13,7 @@ import { BootstrapVue } from 'bootstrap-vue'
 import vSelect from 'vue-select'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import VueSweetalert2 from 'vue-sweetalert2';
+import { Datetime } from 'vue-datetime';
 
 global.Raphael = Raphael
 
@@ -20,6 +21,7 @@ require('jsvectormap/dist/maps/world')
 
 Vue.component('v-select', vSelect)
 Vue.component('apexchart', VueApexCharts)
+Vue.component('datetime', Datetime);
 
 Vue.use(VueSweetalert2);
 Vue.use(BootstrapVue)

@@ -1,0 +1,302 @@
+<template>
+  <div class="content-page">
+    <div class="content">
+      <!-- Start Content-->
+
+      <div class="container-fluid">
+        <!-- start page title -->
+
+        <div class="row">
+          <div class="col-12">
+            <div class="page-title-box">
+              <div class="page-title-right"></div>
+
+              <h4 class="page-title">Account Edit</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- end page title -->
+
+        <form @submit.prevent="edit">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card-box">
+                <h2 class="text-uppercase bg-light p-2 mt-0 mb-3 text-center">
+                  Account Edit
+                </h2>
+
+                <div class="form-group mb-3">
+                  <label for="product-category"
+                    >Role_id<span class="text-danger">*</span></label
+                  >
+
+                  <b-form-select
+                    v-model="role_id"
+                    :options="options1"
+                    require
+                  ></b-form-select>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-name"
+                    >Username<span class="text-danger">*</span></label
+                  >
+
+                  <input
+                    type="text"
+                    id="product-name"
+                    class="form-control"
+                    placeholder="Username"
+                    v-model="username"
+                    required
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-name"
+                    >No KTP<span class="text-danger">*</span></label
+                  >
+
+                  <input
+                    type="text"
+                    id="product-name"
+                    class="form-control"
+                    v-model="no_ktp"
+                    placeholder="No KTP"
+                    required
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-name"
+                    >Mobile Number<span class="text-danger">*</span></label
+                  >
+
+                  <input
+                    type="text"
+                    id="product-name"
+                    class="form-control"
+                    v-model="mobile_no"
+                    placeholder="Mobile Number"
+                    required
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-name"
+                    >Address<span class="text-danger">*</span></label
+                  >
+
+                  <textarea
+                    class="form-control"
+                    id=""
+                    cols="20"
+                    rows="5"
+                    v-model="address"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-category"
+                    >Gender<span class="text-danger">*</span></label
+                  >
+
+                  <b-form-select
+                    class="form-control"
+                    v-model="gender"
+                    :options="options"
+                    require
+                  ></b-form-select>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-name"
+                    >Birth of Date<span class="text-danger">*</span></label
+                  >
+
+                  <!-- <datetime v-model = "date" > </datetime >  -->
+
+                  <input
+                    v-model="birth_date"
+                    type="date"
+                    id="product-name"
+                    class="form-control"
+                    placeholder="Birth of Date"
+                    step="1"
+                    required
+                  />
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="product-name"
+                    >Birth of Place<span class="text-danger">*</span></label
+                  >
+
+                  <input
+                    v-model="birth_place"
+                    type="text"
+                    id="product-name"
+                    class="form-control"
+                    placeholder="Birth of Place"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- end card-box -->
+            </div>
+
+            <!-- end col -->
+          </div>
+
+          <!-- end row -->
+
+          <div class="row">
+            <div class="col-12">
+              <div class="text-center mb-2">
+                <button
+                  type="reset"
+                  class="btn w-sm btn-danger waves-effect waves-light mr-1"
+                  id="reset"
+                >
+                  Reset
+                </button>
+
+                <button
+                  type="submit"
+                  class="btn w-sm btn-success waves-effect waves-light"
+                  id="btn-save"
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+
+            <!-- end col -->
+          </div>
+
+          <!-- end row -->
+
+          <!-- file preview template -->
+        </form>
+      </div>
+
+      <!-- container -->
+    </div>
+
+    <!-- content -->
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Datetime } from "vue-datetime";
+export default {
+  data() {
+    return {
+      options1: [
+        {
+          value: "1",
+          text: "Admin",
+        },
+        {
+          value: "2",
+          text: "Relawan",
+        },
+        {
+          value: "3",
+          text: "Lembaga",
+        },
+        {
+          value: "4",
+          text: "Vendor",
+        },
+      ],
+      options: [
+        {
+          value: "L",
+          text: "Laki-laki ",
+        },
+        {
+          value: "P",
+          text: "Perempuan",
+        },
+      ],
+
+      id: 0,
+      role_id: "",
+      username: "",
+      email: "",
+      password: "",
+      no_ktp: "",
+      mobile_no: "",
+      gender: "",
+      address: "",
+      birth_date: "",
+      birth_place: "",
+
+      editor: ClassicEditor,
+      datetime: Datetime,
+      data: [],
+    };
+  },
+
+  created() {
+    this.id = this.$route.params.id;
+  },
+  async mounted() {
+    this.load();
+  },
+  methods: {
+    async load() {
+      await axios
+        .get("https://c2fc1e3ef947.ngrok.io/user/" + this.id)
+        .then((response) => {
+          this.data = response.data.data;
+
+          (this.id = this.data.id),
+            (this.role_id = this.data.role_id),
+            (this.username = this.data.username),
+            // this.email = this.data.email,
+            // this.password = this.data.password,
+            (this.no_ktp = this.data.no_ktp),
+            (this.mobile_no = this.data.mobile_no),
+            (this.gender = this.data.gender),
+            (this.address = this.data.address),
+            (this.birth_date = this.data.birth_date),
+            (this.birth_place = this.data.birth_place);
+        });
+    },
+    edit() {
+      let formdata = {
+        id: this.id,
+        role_id: this.role_id,
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        no_ktp: this.no_ktp,
+        mobile_no: this.mobile_no,
+        gender: this.gender,
+        address: this.address,
+        birth_date: this.birth_date,
+        birth_place: this.birth_place,
+      };
+
+      axios
+        .put(
+          "https://c2fc1e3ef947.ngrok.io/user/" + this.id + "/action/update",
+          formdata
+        )
+        .then((res) => {
+          this.$swal("Success", "You successfully update this data", "success"),
+            this.$router.push({ name: "account" });
+        });
+    },
+  },
+};
+</script>
+
+<style></style>

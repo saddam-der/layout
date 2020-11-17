@@ -177,7 +177,7 @@ export default {
             this.subdistricta = response.data.data
         },
         async load() {
-            const response = await axios.get('https://api-galangbantuan.matamantra.com/disaster/' + this.id)
+            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/' + this.id)
             this.data = response.data.data
         },
         // async load() {

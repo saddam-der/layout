@@ -35,100 +35,7 @@
                 </template>
             </vue-good-table>
 
-            <form @submit.prevent="update">
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Update Disaster</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Name<span class="text-danger">*</span></label>
-                                            <input type="text" v-model="formEdit.nameEdit" class="form-control" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="product-name">Category<span class="text-danger">*</span></label>
-                                            <select class="form-control" v-model="formEdit.category_idEdit">
-                                                <option v-for="option in categorya" :key="option.id" v-bind:value="option.id">
-                                                    {{ option.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="product-name">Province<span class="text-danger">*</span></label>
-                                            <select class="form-control" v-model="formEdit.province_idEdit">
-                                                <option v-for="option in provincea" :key="option.id" v-bind:value="option.id">
-                                                    {{ option.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="product-name">City<span class="text-danger">*</span></label>
-                                            <select class="form-control" v-model="formEdit.city_idEdit">
-                                                <option v-for="option in citya" :key="option.id" v-bind:value="option.id">
-                                                    {{ option.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="product-name">Subdistrict<span class="text-danger">*</span></label>
-                                            <select class="form-control" v-model="formEdit.sub_district_idEdit">
-                                                <option v-for="option in subdistricta" :key="option.id" v-bind:value="option.id">
-                                                    {{ option.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Story<span class="text-danger">*</span></label>
-                                            <ckeditor :editor="editor" v-model="formEdit.storyEdit"></ckeditor>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Description<span class="text-danger">*</span></label>
-                                            <textarea v-model="formEdit.descriptionEdit" class="form-control" cols="30" rows="3" required></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Address<span class="text-danger">*</span></label>
-                                            <textarea v-model="formEdit.addressEdit" class="form-control" cols="30" rows="3" required></textarea>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Image<span class="text-danger">*</span></label>
-                                            <img :src="formEdit.imageEdit" alt="" width="300px">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Noted<span class="text-danger">*</span></label>
-                                            <input type="text" v-model="formEdit.notesEdit" class="form-control" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Injured<span class="text-danger">*</span></label>
-                                            <input type="text" v-model="formEdit.injuredEdit" class="form-control" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Died<span class="text-danger">*</span></label>
-                                            <input type="text" v-model="formEdit.diedEdit" class="form-control" required>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="bencana-name">Mobile No<span class="text-danger">*</span></label>
-                                            <input type="text" v-model="formEdit.mobile_noEdit" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            
         </div>
     </div>
 </div>
@@ -137,6 +44,7 @@
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
+import { mapActions } from 'vuex';
 
 export default {
     data() {
@@ -266,7 +174,6 @@ export default {
     },
 
     async mounted() {
-        // this.load()
         this.$store.dispatch('loadData');
         this.category()
         this.province()
@@ -275,6 +182,7 @@ export default {
     },
 
     methods: {
+        ...mapActions(['deleteData']),
         deleteDisplay(row) {
             this.$swal({
                 title: 'Are you sure?',
@@ -287,11 +195,12 @@ export default {
                 showLoaderOnConfirm: true
             }).then((result) => {
                 if (result.value) {
-                    axios.delete('https://c2fc1e3ef947.ngrok.io/disaster/' + row.id + '/action/delete').then(res => {
-                        this.load()
-                        let index = this.data.indexOf(row.name)
-                        this.data.splice(index, 1)
-                    })
+                    // axios.delete('https://c2fc1e3ef947.ngrok.io/disaster/' + row.id + '/action/delete').then(res => {
+                    //     this.load()
+                    //     let index = this.data.indexOf(row.name)
+                    //     this.data.splice(index, 1)
+                    // })
+                    this.deleteData({id: row.id})
                     this.$swal('Deleted', 'You successfully deleted this file', 'success')
                 } else {
                     this.$swal('Cancelled', 'Your file is still intact', 'info')
