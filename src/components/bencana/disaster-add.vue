@@ -19,7 +19,7 @@
                 </div>
             </div>
             <!-- end page title -->
-            <form @submit.prevent="add">
+            <form @submit="onSubmit">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card-box">
@@ -37,7 +37,7 @@
                                     </template>
                                 </v-select>-->
                                 <select class="form-control" v-model="form.category_id">
-                                    <option v-for="option in categoryzxc" :key="option.id" v-bind:value="option.id">
+                                    <option v-for="option in category" :key="option.id" v-bind:value="option.id">
                                         {{ option.name }}
                                     </option>
                                 </select>
@@ -142,13 +142,15 @@
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import vue2Dropzone from 'vue2-dropzone'
+import {
+    mapActions
+} from "vuex";
 import axios from 'axios'
 export default {
     data() {
         return {
             editor: ClassicEditor,
             myValue: '',
-            // categorya: [],
             provincea: [],
             citya: [],
             subdistricta: [],
@@ -184,23 +186,18 @@ export default {
     },
 
     computed: {
-        categoryzxc() {
+        category() {
             return this.$store.state.category;
         }
     },
 
     async mounted() {
         this.$store.dispatch('loadCategory');
-        // this.category()
         this.province()
         this.city()
         this.subdistrict()
     },
     methods: {
-        // async category() {
-        //     const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/category')
-        //     this.categorya = response.data.data
-        // },
         async province() {
             const response = await axios.get('https://c2fc1e3ef947.ngrok.io/province')
             this.provincea = response.data.data
@@ -213,11 +210,11 @@ export default {
             const response = await axios.get('https://c2fc1e3ef947.ngrok.io/subdistrict')
             this.subdistricta = response.data.data
         },
-        add() {
-            axios.post('https://c2fc1e3ef947.ngrok.io/disaster/action/add', this.form).then(res => {
-
-            })
-        },
+        ...mapActions(["addData"]),
+        onSubmit(e) {
+            e.preventDefault();
+            this.addData(this.form);
+        }
     },
     components: {
         vueDropzone: vue2Dropzone
