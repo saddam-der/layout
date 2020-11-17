@@ -50,7 +50,32 @@ rr
       <!--- Sidemenu -->
       <div id="sidebar-menu">
         <ul id="side-menu">
-          <li class="menu-title mt-2">Galang</li>
+          <li class="menu-title">Navigation</li>
+
+          <li>
+            <a href="#sidebarDashboards" data-toggle="collapse">
+              <i class="mdi mdi-view-dashboard-outline"></i>
+              <span class="badge badge-info badge-pill float-right">4</span>
+              <span> Dashboards </span>
+            </a>
+            <div class="collapse" id="sidebarDashboards">
+              <ul class="nav-second-level">
+                <li>
+                  <router-link to="/">Dashboard 1</router-link>
+                </li>
+                <li>
+                  <router-link to="/dashboard-2">Dashboard 2</router-link>
+                </li>
+                <li>
+                  <router-link to="/dashboard-3">Dashboard 3</router-link>
+                </li>
+                <li>
+                  <router-link to="/dashboard-4">Dashboard 4</router-link>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="menu-title mt-2">Apps</li>
           <li>
             <a href="#sidebarProduct" data-toggle="collapse">
               <i class="mdi mdi-cart-outline"></i>
