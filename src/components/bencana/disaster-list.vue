@@ -117,7 +117,7 @@ export default {
                 {
                     label: 'Notes',
                     field: 'notes',
-                    // hidden: true,
+                    hidden: true,
                 },
                 {
                     label: 'Image',

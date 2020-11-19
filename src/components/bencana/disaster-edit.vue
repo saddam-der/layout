@@ -129,7 +129,6 @@ export default {
                 dictDefaultMessage: "UPLOAD IMAGE"
             },
             
-            id:0,
             name: '',
             category_id: '',
             description: '',
@@ -147,9 +146,11 @@ export default {
             injured: '',
             died: '',
             last_desc: 'test',
-            time: '2020/10/10 00:00:00',
+            time: '',
             verified: 'APPROVED',
             user_id: 1,
+
+            timetime: ''
 
         }
     },
@@ -162,6 +163,7 @@ export default {
     },
     created() {
         this.id = this.$route.params.id;
+        setInterval(this.getNow, 5);
     },
     methods: {
         async category() {
@@ -226,16 +228,16 @@ export default {
                 injured: this.injured,
                 died: this.died,
                 last_desc: 'test',
-                time: this.time,
+                time: this.timetime,
                 // verified: 'APPROVED',
                 // user_id: 1,
             }
-            // this.updateData(formdata);
-            // this.$swal('Success', 'You successfully update this data', 'success')
-            // this.$router.push({ name: "disasterList" });
-            axios.put('https://api-galangbantuan.matamantra.com/disaster/'+ this.id +'/action/update', formdata).then(res => {
-                this.$swal('Success', 'You successfully update this data', 'success')
-            })
+            this.updateData(formdata);
+            this.$swal('Success', 'You successfully update this data', 'success')
+            this.$router.push({ name: "disasterList" });
+            // axios.put('https://api-galangbantuan.matamantra.com/disaster/'+ this.id +'/action/update', formdata).then(res => {
+            //     this.$swal('Success', 'You successfully update this data', 'success')
+            // })
         },
         uploadImage1 (e) {
             let file = e.target.files[0]
@@ -251,6 +253,13 @@ export default {
                 this.image = resp.data.data.uploaded_file
             })
         },
+        getNow: function() {
+            const today = new Date();
+            const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+            const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            const dateTime = date +' '+ time;
+            this.timetime = dateTime;
+        }
         
     },
     components: {

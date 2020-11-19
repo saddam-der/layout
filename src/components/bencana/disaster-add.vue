@@ -15,17 +15,30 @@
                             </ol>
                         </div>
                         <h4 class="page-title">Disaster / Entri</h4>
-                        
                     </div>
                 </div>
             </div>
+            
             <!-- end page title -->
             <form @submit="onSubmit">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card-box">
                             <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">GENERAL</h5>
-
+                            <GmapMap
+                                            :center="cordinates"
+                                            :zoom="zooms"
+                                            style="width: 100%; height: 500px; margin-bottom: 10px;"
+                                            @click="mark"
+                                        >
+                                            <GmapMarker
+                                                :position="{
+                                                    lat: Number(lats),
+                                                    lng: Number(longs)
+                                                }"
+                                                
+                                            />
+                                        </GmapMap>
                             <div class="form-group mb-3">
                                 <label for="bencana-name">Name<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" v-model="form.name" required>
@@ -45,13 +58,16 @@
                                 <label for="bencana-city">City<span class="text-danger">*</span></label>
                                 <v-select label="name" :options="citya" v-model="form.city_id" :key="citya.id" :reduce="citya => citya.id">
                                 </v-select>
-                                
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-Subdistrict">Subdistrict<span class="text-danger">*</span></label>
                                 <v-select label="name" :options="subdistricta" v-model="form.sub_district_id" :key="subdistricta.id" :reduce="subdistricta => subdistricta.id">
-                                </v-select>
-                                
+                                </v-select>                                
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="bencana-District">District<span class="text-danger">*</span></label>
+                                <v-select label="name" :options="subdistricta" v-model="form.sub_district_id" :key="subdistricta.id" :reduce="subdistricta => subdistricta.id">
+                                </v-select>                                
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Story<span class="text-danger">*</span></label>
@@ -156,6 +172,14 @@ export default {
                 addRemoveLinks: true,
                 dictDefaultMessage: "UPLOAD IMAGE"
             },
+            cordinates: {
+                lat: -0.555614,
+                lng: 119.560281
+            },
+            zooms: 0,
+            lats: 0,
+            longs: 0
+            
         }
     },
 
@@ -232,7 +256,11 @@ export default {
             const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
             const dateTime = date +' '+ time;
             this.form.time = dateTime;
-        }
+        },
+        mark(event) {
+            this.lats = event.latLng.lat()
+            this.longs = event.latLng.lng()
+        },
     },
     components: {
         vueDropzone: vue2Dropzone

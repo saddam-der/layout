@@ -14,6 +14,7 @@ import vSelect from 'vue-select'
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import { Datetime } from 'vue-datetime';
+import * as VueGoogleMaps from 'vue2-google-maps'
 
 global.Raphael = Raphael
 
@@ -30,6 +31,12 @@ Vue.use(VueApexCharts)
 Vue.use(VueVectorMap)
 Vue.use(VueGoodTablePlugin)
 Vue.use( CKEditor );
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyB1YSaYcGqU_IUTotXfnUUBKigSKFBt9_E'
+  }
+})
 
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'bootstrap/dist/css/bootstrap.css'
