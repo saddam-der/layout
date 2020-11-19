@@ -97,9 +97,9 @@ export default new Vuex.Store({
         commit('SET_ADDING', response.data.data);
       })
     },
-    async updateData({commit}, data) {
-      axios.put(api+'/disaster/' + data.id + '/action/update').then((response) =>  {
-        commit('SET_DATA', response.data.data);
+    async updateData({ commit }, data) {
+      axios.put(api+'/disaster/' + data.id + '/action/update', data).then((response) => {
+        commit('SET_DATA', response.data.data)
       })
     },
     async deleteData({commit}, data) {
