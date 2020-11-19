@@ -15,6 +15,7 @@
                             </ol>
                         </div>
                         <h4 class="page-title">Disaster / Entri</h4>
+                        
                     </div>
                 </div>
             </div>
@@ -31,55 +32,26 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Category<span class="text-danger">*</span></label>
-                                <!-- <v-select label="name" :options="categorya" v-model="form.category_id">
-                                    <template #search="{ attributes, events }">
-                                        <input class="vs__search" :required="!form.category_id" v-bind="attributes" v-on="events" />
-                                    </template>
-                                </v-select>-->
-                                <select class="form-control" v-model="form.category_id">
-                                    <option v-for="option in category" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                <v-select label="name" :options="category" v-model="form.category_id" :key="category.id" :reduce="category => category.id">
+                                </v-select>
+                                
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-province">Province<span class="text-danger">*</span></label>
-                                <!--<v-select label="name" :options="provincea" v-model="form.province_id">
-                                    <template #search="{attributes, events}">
-                                        <input class="vs__search" :required="!form.province_id" v-bind="attributes" v-on="events" />
-                                    </template>
-                                </v-select>-->
-                                <select class="form-control" v-model="form.province_id">
-                                    <option v-for="option in provincea" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                <v-select label="name" :options="provincea" v-model="form.province_id" :key="provincea.id" :reduce="provincea => provincea.id">
+                                </v-select>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-city">City<span class="text-danger">*</span></label>
-                                <!--<v-select label="name" :options="citya" v-model="form.city_id">
-                                    <template #search="{attributes, events}">
-                                        <input class="vs__search" :required="!form.city_id" v-bind="attributes" v-on="events" />
-                                    </template>
-                                </v-select> -->
-                                <select class="form-control" v-model="form.city_id">
-                                    <option v-for="option in citya" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                <v-select label="name" :options="citya" v-model="form.city_id" :key="citya.id" :reduce="citya => citya.id">
+                                </v-select>
+                                
                             </div>
                             <div class="form-group mb-3">
                                 <label for="bencana-Subdistrict">Subdistrict<span class="text-danger">*</span></label>
-                                <!--<v-select label="name" :options="subdistricta" v-model="form.sub_district_id">
-                                    <template #search="{attributes, events}">
-                                        <input class="vs__search" :required="!form.sub_district_id" v-bind="attributes" v-on="events" />
-                                    </template>
-                                </v-select>-->
-                                <select class="form-control" v-model="form.sub_district_id">
-                                    <option v-for="option in subdistricta" :key="option.id" v-bind:value="option.id">
-                                        {{ option.name }}
-                                    </option>
-                                </select>
+                                <v-select label="name" :options="subdistricta" v-model="form.sub_district_id" :key="subdistricta.id" :reduce="subdistricta => subdistricta.id">
+                                </v-select>
+                                
                             </div>
                             <div class="form-group mb-3">
                                 <label for="product-name">Story<span class="text-danger">*</span></label>
@@ -98,7 +70,7 @@
                     <div class="col-lg-6">
                         <div class="card-box">
                             <h5 class="text-uppercase bg-light p-2 mt-0 mb-3">IMAGE</h5>
-                            <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                            <input type="file" @change="uploadImage" name="image" id="image"  accept="image/*" >
                         </div>
                         <div class="card-box">
                             <div class="form-group mb-3">
@@ -132,7 +104,7 @@
                 </div>
             </form>
             <!-- end row -->
-
+            
             <!-- end row -->
         </div> <!-- container -->
     </div> <!-- content -->
@@ -149,9 +121,11 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            myDate : new Date().toISOString().slice(0,10),
             editor: ClassicEditor,
             myValue: '',
             provincea: [],
+            imagePath: '',
             citya: [],
             subdistricta: [],
             form: {
@@ -166,7 +140,7 @@ export default {
                 sub_district_id: '',
                 address: '',
                 notes: '',
-                image: 'test',
+                image: '',
                 mobile_no: '',
                 status: true,
                 injured: '',
@@ -199,25 +173,72 @@ export default {
     },
     methods: {
         async province() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/province')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/province')
             this.provincea = response.data.data
         },
         async city() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/city')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/city')
             this.citya = response.data.data
         },
         async subdistrict() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/subdistrict')
+            const response = await axios.get('https://api-galangbantuan.matamantra.com/subdistrict')
             this.subdistricta = response.data.data
         },
         ...mapActions(["addData"]),
         onSubmit(e) {
             e.preventDefault();
+            
             this.addData(this.form);
+            this.$swal("Success", "You successfully Add this data", "success");
+                this.form.name = '';
+                this.form.category_id = '';
+                this.form.description = '';
+                this.form.story = '';
+                this.form.lat = -6.292849;
+                this.form.lng = 106.793207;
+                this.form.province_id = '';
+                this.form.city_id = '';
+                this.form.sub_district_id = '';
+                this.form.address = '';
+                this.form.notes = '';
+                this.form.image = '';
+                this.form.mobile_no = '';
+                this.form.status = true;
+                this.form.injured = '';
+                this.form.died = '';
+                this.form.last_desc = 'test';
+                this.form.time = '';
+                this.form.verified = 'APPROVED';
+                this.form.user_id = 1;
+        },
+
+        uploadImage (e) {
+            let file = e.target.files[0]
+            const bodyForm = new FormData()
+            bodyForm.append('file', file)
+            
+            const headers = {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': 'Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ1c2FnZSI6ImFwcF9hY2Nlc3MiLCJpYXQiOjE1NzM0ODIwODksInN1YiI6MX0.WE3Pm7PYHsQgvYJ4R_laZXp21n_uYG8p3Kplev3qYMKi0vBO_rvl-ZleA6htApoVDmBEAIU-oq_a0_sztXVUqw'
+            }
+
+            axios.post('https://api.matamantra.com/story/file/upload', bodyForm,  { headers: headers, }).then(resp => {
+                this.form.image = resp.data.data.uploaded_file
+            })
+        },
+        getNow: function() {
+            const today = new Date();
+            const date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+            const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            const dateTime = date +' '+ time;
+            this.form.time = dateTime;
         }
     },
     components: {
         vueDropzone: vue2Dropzone
+    },
+    created() {
+        setInterval(this.getNow, 5);
     },
 }
 </script>

@@ -19,7 +19,7 @@
                 </div>
             </div>
             <!-- end page title -->
-            <vue-good-table :columns="columns" :rows="data" :search-options="{ enabled: true }" :pagination-options="{ enabled: true, mode: 'records', perPage: 100, position: 'top', }">
+            <vue-good-table :columns="columns" :rows="data" :sort-options="{ enabled: true, }" :pagination-options="{ enabled: true, mode: 'records', perPage: 100, position: 'top', }">
                 <template slot="table-row" slot-scope="props">
                     <span v-if="props.column.field == 'image'">
                         <img :src="props.row.image" width="100px">
@@ -34,7 +34,6 @@
                     </span>
                 </template>
             </vue-good-table>
-
             
         </div>
     </div>
@@ -127,6 +126,7 @@ export default {
                 {
                     label: 'Mobile No',
                     field: 'mobile_no',
+                    type: 'number',
                 },
                 {
                     label: 'Status',
@@ -137,11 +137,13 @@ export default {
                     label: 'Injured',
                     field: 'injured',
                     hidden: true,
+                    type: 'number',
                 },
                 {
                     label: 'Died',
                     field: 'died',
                     hidden: true,
+                    type: 'number',
                 },
                 {
                     label: 'Last Desc',
@@ -151,7 +153,8 @@ export default {
                 {
                     label: 'Time',
                     field: 'time',
-                    width: '200px'
+                    width: '200px',
+                    
                 },
                 {
                     label: 'Verified',
@@ -175,10 +178,7 @@ export default {
 
     async mounted() {
         this.$store.dispatch('loadData');
-        this.category()
-        this.province()
-        this.city()
-        this.subdistrict()
+        
     },
 
     methods: {
@@ -195,88 +195,24 @@ export default {
                 showLoaderOnConfirm: true
             }).then((result) => {
                 if (result.value) {
-                    // axios.delete('https://c2fc1e3ef947.ngrok.io/disaster/' + row.id + '/action/delete').then(res => {
-                    //     this.load()
-                    //     let index = this.data.indexOf(row.name)
-                    //     this.data.splice(index, 1)
-                    // })
                     this.deleteData({id: row.id})
+                    
                     this.$swal('Deleted', 'You successfully deleted this file', 'success')
+                    
                 } else {
                     this.$swal('Cancelled', 'Your file is still intact', 'info')
                 }
             })
         },
-        // async load() {
-        //     await axios.get('https://c2fc1e3ef947.ngrok.io/disaster?page=1&limit=100').then((response) => {
-        //         for (var i = 0; i < response.data.data.length; i++) {
-        //             response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
-        //             this.data.push(response.data.data[i])
-        //             // this.data = response.data.data
-        //         }
+
+        // del(row) {
+        //     axios.delete('https://c2fc1e3ef947.ngrok.io/disaster/' + row.id + '/action/delete').then(res => {
+        //         this.load()
+        //         let index = this.data.indexOf(row.name)
+        //         this.data.splice(index, 1)
         //     })
         // },
-        // async load() {
-        //     const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster')
-        //     this.data = response.data.data
-        // },
-        async category() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/disaster/category')
-            this.categorya = response.data.data
-        },
-        async province() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/province')
-            this.provincea = response.data.data
-        },
-        async city() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/city')
-            this.citya = response.data.data
-        },
-        async subdistrict() {
-            const response = await axios.get('https://c2fc1e3ef947.ngrok.io/subdistrict')
-            this.subdistricta = response.data.data
-        },
-
-        del(row) {
-            axios.delete('https://c2fc1e3ef947.ngrok.io/disaster/' + row.id + '/action/delete').then(res => {
-                this.load()
-                let index = this.data.indexOf(row.name)
-                this.data.splice(index, 1)
-            })
-        },
-        // getEdit: function (row) {
-        //     this.formEdit.idEdit = row.id;
-        //     this.formEdit.nameEdit = row.name;
-        //     this.formEdit.category_idEdit = row.category;
-        //     this.formEdit.storyEdit = row.story;
-        //     this.formEdit.descriptionEdit = row.description;
-        //     this.formEdit.addressEdit = row.address;
-        //     this.formEdit.imageEdit = row.image;
-        //     this.formEdit.notesEdit = row.notes[0].kebutuhan + ', ' + row.notes[0].jumlah;
-        //     this.formEdit.injuredEdit = row.injured;
-        //     this.formEdit.diedEdit = row.died;
-        //     this.formEdit.mobile_noEdit = row.mobile_no;
-        // },
-        // update() {
-        //     axios.put('https://c2fc1e3ef947.ngrok.io/disaster/' + this.formEdit.idEdit + '/action/update', {
-        //             name: this.formEdit.nameEdit,
-        //             category_id: this.formEdit.category_idEdit,
-        //             description: this.formEdit.descriptionEdit,
-        //             story: this.formEdit.storyEdit,
-        //             province_id: this.formEdit.province_idEdit,
-        //             city_id: this.formEdit.city_idEdit,
-        //             sub_district_id: this.formEdit.sub_district_idEdit,
-        //             address: this.formEdit.addressEdit,
-        //             notes: this.formEdit.notesEdit,
-        //             mobile_no: this.formEdit.mobile_noEdit,
-        //             injured: this.formEdit.injuredEdit,
-        //             died: this.formEdit.diedEdit,
-        //         })
-        //         .then(res => {
-        //             // handle success
-        //             this.load()
-        //         })
-        // },
+        
     },
 }
 </script>

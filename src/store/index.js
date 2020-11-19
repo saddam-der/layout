@@ -4,7 +4,7 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
-var api = "https://c2fc1e3ef947.ngrok.io";
+var api = "https://api-galangbantuan.matamantra.com";
 
 export default new Vuex.Store({
   state: {
@@ -21,6 +21,12 @@ export default new Vuex.Store({
     SET_DATA(state, data){
       state.data = data
     },
+    SET_ADDING(state, data){
+      state.data.unshift(data)
+    },
+    SET_DELETE(state, id){
+      state.data = state.data.filter(data => data.id !== id)
+    },
     SET_CATEGORY(state, category){
       state.category = category
     },
@@ -33,39 +39,38 @@ export default new Vuex.Store({
     SET_SUBDISTRICT(state, subdistrict){
       state.subdistrict = subdistrict
     },
-    SET_ADDING(state, data){
-      state.data.unshift(data)
-    },
+    //////// USER
     list_account(state , data){
       state.list = data
     },
     register_account(state , data){
         state.list.unshift(data)
     },
+    delete_list(state, id){
+      state.list = state.list.filter(data => data.id !== id)
+    },
+    //////// PRODUCT
     set_product(state, product) {
       state.product = product
     },
-    set_category(state, category) {
+    set_category_product(state, category) {
       state.category = category
     },
-    // SET_DELETE(state, id){
-    //   state.data = state.data.filter(data => data.id !== id)
-    // }
-    // newTodo: (state, todo) => state.todos.unshift(todo),
+    set_delete_product(state, id){
+      state.product = state.product.filter(product => product.id !== id)
+    },
+    
   },
   actions: {
+    // DISASTER
     async loadData({ commit }) {
       axios.get(api+'/disaster?page=1&limit=100').then((response) => {
         // for (var i = 0; i < response.data.data.length; i++) {
         //   response.data.data[i].notes = JSON.parse(response.data.data[i].notes)
-        // }
-        // for(let message of response.data.data){
-        //   console.log(message);
-        // }
+        // }        
         commit('SET_DATA', response.data.data)
       })
     },
-
     async loadCategory({ commit }) {
       axios.get(api+'/disaster/category').then((response) => {
         commit('SET_CATEGORY', response.data.data)
@@ -88,16 +93,22 @@ export default new Vuex.Store({
     },
 
     async addData({commit}, form) {
-      axios.post(api+'/disaster/action/add', form).then((response) => {
+      await axios.post(api+'/disaster/action/add', form).then((response) => {
         commit('SET_ADDING', response.data.data);
       })
     },
-    async deleteData({commit}, data) {
-      axios.delete(api+'/disaster/' + data.id + '/action/delete').then((response) =>  {
+    async updateData({commit}, data) {
+      axios.put(api+'/disaster/' + data.id + '/action/update').then((response) =>  {
         commit('SET_DATA', response.data.data);
       })
     },
+    async deleteData({commit}, data) {
+      await axios.delete(api+'/disaster/' + data.id + '/action/delete').then((response) =>  {
+        commit('SET_DELETE', data.id);
+      })
+    },
 
+    // USER
     listAccount({ commit }) {
       axios.get(api+'/user?page=1&limit=100').then((response) => {
         commit('list_account',response.data.data)
@@ -109,10 +120,18 @@ export default new Vuex.Store({
      })
     },
     async deleteAccount({ commit }, data) {
-      axios.delete(api+'/user/' + data.id + '/action/delete').then((response) => {
-       commit('list_account', response.data.data)
+      await axios.delete(api+'/user/' + data.id + '/action/delete').then((response) => {
+       commit('delete_list', data.id)
      })
     },
+    editUser({commit}, form){
+      axios.put(api+'/user/' + form.id + '/action/update', form).then((response) => {
+         commit('list_account', response.data.data)
+      
+     })
+    },
+
+    // PRODUCT
     loadProduct({ commit }) {
       axios.get(api+'/product?page=1&limit=10').then((response) => {
         for (var i = 0; i < response.data.data.length; i++) {
@@ -131,7 +150,7 @@ export default new Vuex.Store({
     },
     loadCategoryProduct({ commit }) {
       axios.get(api + '/product/category').then(response => {
-      commit('set_category', response.data.data)
+        commit('set_category_product', response.data.data)
       })
     },
     async addProduct({ commit }, data) {
@@ -155,7 +174,12 @@ export default new Vuex.Store({
     },
     async deleteProduct({ commit }, data) {
       axios.delete(api+'/product/' + data.id + '/action/delete').then((response) => {  
-      commit('set_product', response.data.data)
+      commit('set_delete_product', data.id)
+      })
+    },
+    editProduct({ commit }, data) {
+      axios.put(api+'/product/' + data.id + '/action/update', data).then((response) => {
+        commit('set_product', response.data.data)
       })
     },
     

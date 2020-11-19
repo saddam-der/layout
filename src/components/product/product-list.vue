@@ -39,6 +39,13 @@
                         perPage: 3,
                         perPageDropdown: [3, 5, 10, 20],
                         mode: 'records',
+                        dropdownAllowAll: false,
+                        nextLabel: 'next',
+                        prevLabel: 'prev',
+                        rowsPerPageLabel: 'Rows per page',
+                        ofLabel: 'of',
+                        pageLabel: 'page', // for 'pages' mode
+                        allLabel: 'All',
                       }"
                     >
                       <template slot="table-row" slot-scope="props">
@@ -108,6 +115,7 @@ export default {
         {
           label: "Id",
           field: "id",
+          type: 'number',
         },
         {
           label: "Name",
@@ -192,6 +200,8 @@ export default {
             "You successfully deleted this file",
             "success"
           );
+          let index = this.data.indexOf(row.name)
+          this.data.splice(index, 1)
         } else {
           this.$swal("Cancelled", "Your file is still intact", "info");
         }
@@ -210,10 +220,8 @@ export default {
       this.formEditMethod = row.method;
     },
     editProduct() {
-      $("#modalEdit").hide();
-      $(".modal-backdrop").remove();
       this.$swal("Success", "You successfully update this data", "success");
-      // axios.put('https://7de53b6c7594.ngrok.io/product/' + this.formEditId + '/action/update', {
+      // axios.put('api-galangbantuan.matamantra.com/product/' + this.formEditId + '/action/update', {
       //     name: this.formEditName,
       //     image: '{\"img1\":\"' + this.formEditImage + '\"}',
       //     description: this.formEditDescription,
